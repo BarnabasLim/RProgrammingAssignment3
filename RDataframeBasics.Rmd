@@ -1,0 +1,136 @@
+---
+title: "R DataFrame Basics"
+output: html_notebook
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Ctrl+Shift+Enter*. 
+
+```{r}
+plot(cars)
+```
+
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).
+
+The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
+
+This Notebook explores Data frames.
+DataFrames contains 
+-observations (each row) 
+-variables (each column)
+
+
+Creating a DataFrame
+Step 1: create vectors of the same length
+
+```{r}
+name<-c("Anne","Pete","Frank","Julia","Cath")
+age<-c(28,30,21,39,35)
+child<-c(F,T,T,F,T)
+```
+
+
+Step 2: create Dataframe with data.frame() function
+```{r}
+#dataframe automaticatlly takes variable names as column names
+##df<-data.frame(name,age,child)
+df<-data.frame(Name=name,Age=age,Child=child)
+
+#names can be assigned using names()
+##names(df)<-c("Name1","Age1","Child1")
+df
+```
+
+DataFrames are essentially Lists with elements of the same length
+```{r}
+str(df)
+```
+
+Subset DataFrame
+1. Data frames can help extract in a similar manner as with Matrix
+```{r}
+people<-data.frame(Name=name,Age=age,Child=child)
+#Subset specific element
+people[3,2]        ##[1]21
+people[3,"Age"]    ##[1]21
+
+#subset specific row -> returns a data frame with different observations
+people[3,]        ##   name age child
+                  ##3 Frank  21  TRUE
+
+#subset specific column -> returns a vector
+people[,"Age"]    ##[1] 28 30 21 39 35
+
+#subset 
+people[c(3,5), c("Age", "Child")] 
+                  ##   age child
+                  ##3   21  TRUE
+                  ##5   35  TRUE
+```
+Difference between dataframe and Matrix
+```{r}
+#unlike Matrix which will search column by column for the index, when you specify only one index inside the dataframe R will return a new data frame with the column specified
+
+people[2] # returns a data frame
+#The reason is because Data frame are more like list containing vectors of the same length
+```
+DataFrame and List
+```{r}
+#to access the age column as a vector
+people$Age       ##[1] 28 30 21 39 35
+people[["Age"]]  ##[1] 28 30 21 39 35
+people[[2]]      ##[1] 28 30 21 39 35
+```
+Just like a list 
+when you use a single bracker "[]" to subset a list a new list containing the specified element is returned
+```{r}
+people["Age"]
+people[2]
+```
+Adding a column
+```{r}
+people<-data.frame(Name=name,Age=age,Child=child)
+height<-c(163,177,163,162,157)
+
+#recall $ and [[]] returns a vector
+people$height<-height
+people[['height']]<-height
+people
+```
+Adding a column using cbind
+```{r}
+people<-data.frame(Name=name,Age=age,Child=child)
+Height<-c(163,177,163,162,157)
+cbind(people, Height)
+```
+
+Adding a row using rbind
+```{r}
+# inorder to use rbind you need to first create a datafrane with a single observation with the same names in the dataframe
+people<-data.frame(Name=name,Age=age,Child=child,Height)
+tom<-data.frame(Name="Tom",Age=37,Child=FALSE, Height=183)
+rbind(people,tom )
+
+```
+Sorting
+```{r}
+#use the order function
+
+ranks<-order(people$Age)
+ranks
+
+people[ranks,]
+#reverse the order
+people[order(people$Age, decreasing = TRUE),]
+people[2,]
+```
+```{r}
+removing_Na<-sapply(c(T,T,NA,F,T),function(x) !is.na(x)&x)
+people[removing_Na,]
+
+
+```
+
