@@ -30,17 +30,19 @@ class(output)
 length(output)
 #Note output is a list class need to convert to dataframe by converting to Json first
 
-# OR:
+# 4. OR:
 req <- with_config(gtoken, GET("https://api.github.com/users/jtleek/datasharing"))
 stop_for_status(req)
 content(req)
 
+
+#5. convert json to data frame
 json2=jsonlite::fromJSON(toJSON(output))
 names(json2)
 
 json2[json2$name=="datasharing",c("created_at")]
 
-
+#5. or manipulate list to identify 
 datashare <- which(sapply(output, FUN=function(X) "datasharing" %in% X))
 datashare
 list(output[[19]]$name, output[[19]]$created_at)
