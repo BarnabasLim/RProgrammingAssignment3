@@ -29,23 +29,23 @@ This file 'run_analysis.R' contains all the code to perform the analyses describ
 File with R code "run_analysis.R" perform 5 following steps (in accordance assigned task of course work):   
 0: Understanding the data set that was providedRequirement 
 **Requirement 1: Merges the training and the test sets to create one data set.**
-1 Merges the training and the test sets to create one data set.
-  1.1 extract the Training set/labels and Test set/labels
-    1.1.1 Reading trainings tables   
-    1.1.2 Reading testing tables  
-  1.2 exploring Inertial Signals (please ignore this step if you are not interested in exploring Inertial Signals)
-  1.3 Merging all the datasets
+1. Merges the training and the test sets to create one data set.
+  1.1. extract the Training set/labels and Test set/labels
+    1.1.1. Reading trainings tables   
+    1.1.2. Reading testing tables  
+  1.2. exploring Inertial Signals (please ignore this step if you are not interested in exploring Inertial Signals)
+  1.3. Merging all the datasets
 **Requirement 4: Appropriately labels the data set with descriptive variable names.**
-  1.4 Appropriately labels the data set with descriptive variable names. 
-    1.4.1 Reading feature vector     
+  1.4. Appropriately labels the data set with descriptive variable names. 
+    1.4.1. Reading feature vector     
 **Requirement 2: Extracts only the measurements on the mean and standard deviation for each measurement.**
 2. Extracting only the measurements on the mean and standard deviation for each measurement   
-  2.1 Filter column names ending with "-mean()-X" or "-std()-X"  
-  2.2 Filter dataset by filtered column   
+  2.1. Filter column names ending with "-mean()-X" or "-std()-X"  
+  2.2. Filter dataset by filtered column   
 **Requirement 3: Uses descriptive activity names to name the activities in the data set**
 3. Using descriptive activity names to name the activities in the data set   
-  3.1 Reading activity labels
+  3.1. Reading activity labels
 **Requirement 5: From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.**
 4. Creating a second, independent tidy data set with the average of each variable for each activity and each subject   
-  4.1 Making second tidy data set   
-  4.2 Writing second tidy data set in txt file   
+  4.1. Making second tidy data set   
+  4.2. Writing second tidy data set in txt file   
