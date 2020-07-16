@@ -12,7 +12,9 @@
 # 'test/X_test.txt': Test set.
 # 'test/y_test.txt': Test labels.
 #******************************************************************
-#Step 1: extract the Training set/labels and Test set/labels
+#Requirement 1:Merges the training and the test sets to create one data set.
+#Step 1: Merges the training and the test sets to create one data set.
+#Step 1.1: extract the Training set/labels and Test set/labels
 #******************************************************************
 test_set_path<-"./course3/Assignment/getdata_projectfiles_UCI HAR Dataset/UCI HAR Dataset/test/X_test.txt"
 test_label_path<-"./course3/Assignment/getdata_projectfiles_UCI HAR Dataset/UCI HAR Dataset/test/y_test.txt"
@@ -43,7 +45,7 @@ unique(train_label)                          #unique values are 1,2,3,4,5,6 corr
 
 
 #******************************************************************
-#Step 1.1: exploring Inertial Signals
+#Step 1.2: exploring Inertial Signals
 #please ignore this step if you are not interested in exploring Inertial Signals
 #******************************************************************
 set<-c("test","train")
@@ -58,7 +60,8 @@ for (j in seq_along(set) ){
   }
 }
 #******************************************************************
-#Step 1.2: appending labels variables and the features variable
+#Step 1.3: Merging all the datasets
+#          appending labels variables and the features variable
 #          then combining test and train data set
 #******************************************************************
 test<-cbind(test_set,test_label,test_subject)
@@ -67,7 +70,9 @@ complete<-rbind(test,train)                  #Expected
 str(complete)                                #10299 observations x 563 variable (features+label+subject)
 
 #******************************************************************
-#Step 1.3: changing the names of complete data set using features.txt
+#Requirement 4: Appropriately labels the data set with descriptive variable names.
+#Step 1.4: Appropriately labels the data set with descriptive variable names.
+#          changing the names of complete data set using features.txt
 #******************************************************************
 features_path<-"./course3/Assignment/getdata_projectfiles_UCI HAR Dataset/UCI HAR Dataset/features.txt"
 features_name<-read.table(features_path)
@@ -77,6 +82,7 @@ names(complete)<-features_name[[2]]
 str(complete)                                #10299 observations x  563 variables(features+label+subject)
 
 #******************************************************************
+#Requirement 2: Extracts only the measurements on the mean and standard deviation for each measurement.
 #Step 2: Extracts only the measurements on the mean and standard deviation for each measurement
 #******************************************************************
 features_name_mean_sd<-features_name[grepl("(-mean[(][)]-[XYZ]|-std[(][)]-[XYZ])$", features_name$V2),]
@@ -107,7 +113,8 @@ names(complete_mean_sd)
 # [49] "label"                  "subject"
 
 #******************************************************************
-#Step 4: Uses descriptive activity names to name the activities in the data set
+#Requirement 3: Uses descriptive activity names to name the activities in the data set
+#Step 3: Uses descriptive activity names to name the activities in the data set
 #******************************************************************
 activity_label_path<-"./course3/Assignment/getdata_projectfiles_UCI HAR Dataset/UCI HAR Dataset/activity_labels.txt"
 
@@ -129,7 +136,8 @@ str(complete_mean_sd_label)                  #10299 observation of  51 variables
 
 
 #******************************************************************
-#Step 5: create independent tidy data set with the average of each variable for each activity and each subject.
+#Requirement 5: From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
+#Step 4: create independent tidy data set with the average of each variable for each activity and each subject.
 #******************************************************************
 
 featuremean_activity_label<-aggregate(.~subject+activity_label,complete_mean_sd_label,mean)
