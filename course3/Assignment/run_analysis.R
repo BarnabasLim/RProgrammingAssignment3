@@ -85,32 +85,52 @@ str(complete)                                #10299 observations x  563 variable
 #Requirement 2: Extracts only the measurements on the mean and standard deviation for each measurement.
 #Step 2: Extracts only the measurements on the mean and standard deviation for each measurement
 #******************************************************************
-features_name_mean_sd<-features_name[grepl("(-mean[(][)]-[XYZ]|-std[(][)]-[XYZ])$", features_name$V2),]
+features_name_mean_sd<-features_name[grepl("mean|std", features_name$V2),]
 complete_mean_sd<-complete[,append(features_name_mean_sd[[2]],c("label","subject"))]
-str(complete_mean_sd)                        #10299 observations x 50 variable (mean_sd_features+label)
-# 'data.frame':	10299 obs. of  50 variables:
-# $ tBodyAcc-mean()-X     : num  0.257 0.286 0.275 0.27 0.275 ...
+str(complete_mean_sd)                        #10299 observations x 81 variable (mean_sd_features+label)
+# 'data.frame':	10299 obs. of  2 variables:
+#   $ label  : int  5 5 5 5 5 5 5 5 5 5 ...
+# $ subject: int  2 2 2 2 2 2 2 2 2 2 ...
+# > features_name_mean_sd<-features_name[grepl("mean|std", features_name$V2),]
+# > complete_mean_sd<-complete[,append(features_name_mean_sd[[2]],c("label","subject"))]
+# > str(complete_mean_sd)   
+# 'data.frame':	10299 obs. of  81 variables:
+# $ tBodyAcc-mean()-X              : num  0.257 0.286 0.275 0.27 0.275 ...
 # .                         .
 # .                         .
 # .                         .
-# $ fBodyGyro-std()-Z     : num  -0.956 -0.97 -0.979 -0.965 -0.97 ...
-# $ label                 : int  5 5 5 5 5 5 5 5 5 5 ...
-# $ subject               : int  2 2 2 2 2 2 2 2 2 2 ...
+# $ fBodyBodyGyroJerkMag-meanFreq(): num  0.0716 -0.4012 0.0629 0.1167 -0.1217 ...
+# $ label                          : int  5 5 5 5 5 5 5 5 5 5 ...
+# $ subject                        : int  2 2 2 2 2 2 2 2 2 2 ...
 names(complete_mean_sd)
 # > names(complete_mean_sd)
-# [1] "tBodyAcc-mean()-X"      "tBodyAcc-mean()-Y"      "tBodyAcc-mean()-Z"      "tBodyAcc-std()-X"      
-# [5] "tBodyAcc-std()-Y"       "tBodyAcc-std()-Z"       "tGravityAcc-mean()-X"   "tGravityAcc-mean()-Y"  
-# [9] "tGravityAcc-mean()-Z"   "tGravityAcc-std()-X"    "tGravityAcc-std()-Y"    "tGravityAcc-std()-Z"   
-# [13] "tBodyAccJerk-mean()-X"  "tBodyAccJerk-mean()-Y"  "tBodyAccJerk-mean()-Z"  "tBodyAccJerk-std()-X"  
-# [17] "tBodyAccJerk-std()-Y"   "tBodyAccJerk-std()-Z"   "tBodyGyro-mean()-X"     "tBodyGyro-mean()-Y"    
-# [21] "tBodyGyro-mean()-Z"     "tBodyGyro-std()-X"      "tBodyGyro-std()-Y"      "tBodyGyro-std()-Z"     
-# [25] "tBodyGyroJerk-mean()-X" "tBodyGyroJerk-mean()-Y" "tBodyGyroJerk-mean()-Z" "tBodyGyroJerk-std()-X" 
-# [29] "tBodyGyroJerk-std()-Y"  "tBodyGyroJerk-std()-Z"  "fBodyAcc-mean()-X"      "fBodyAcc-mean()-Y"     
-# [33] "fBodyAcc-mean()-Z"      "fBodyAcc-std()-X"       "fBodyAcc-std()-Y"       "fBodyAcc-std()-Z"      
-# [37] "fBodyAccJerk-mean()-X"  "fBodyAccJerk-mean()-Y"  "fBodyAccJerk-mean()-Z"  "fBodyAccJerk-std()-X"  
-# [41] "fBodyAccJerk-std()-Y"   "fBodyAccJerk-std()-Z"   "fBodyGyro-mean()-X"     "fBodyGyro-mean()-Y"    
-# [45] "fBodyGyro-mean()-Z"     "fBodyGyro-std()-X"      "fBodyGyro-std()-Y"      "fBodyGyro-std()-Z"     
-# [49] "label"                  "subject"
+# [1] "tBodyAcc-mean()-X"               "tBodyAcc-mean()-Y"               "tBodyAcc-mean()-Z"              
+# [4] "tBodyAcc-std()-X"                "tBodyAcc-std()-Y"                "tBodyAcc-std()-Z"               
+# [7] "tGravityAcc-mean()-X"            "tGravityAcc-mean()-Y"            "tGravityAcc-mean()-Z"           
+# [10] "tGravityAcc-std()-X"             "tGravityAcc-std()-Y"             "tGravityAcc-std()-Z"            
+# [13] "tBodyAccJerk-mean()-X"           "tBodyAccJerk-mean()-Y"           "tBodyAccJerk-mean()-Z"          
+# [16] "tBodyAccJerk-std()-X"            "tBodyAccJerk-std()-Y"            "tBodyAccJerk-std()-Z"           
+# [19] "tBodyGyro-mean()-X"              "tBodyGyro-mean()-Y"              "tBodyGyro-mean()-Z"             
+# [22] "tBodyGyro-std()-X"               "tBodyGyro-std()-Y"               "tBodyGyro-std()-Z"              
+# [25] "tBodyGyroJerk-mean()-X"          "tBodyGyroJerk-mean()-Y"          "tBodyGyroJerk-mean()-Z"         
+# [28] "tBodyGyroJerk-std()-X"           "tBodyGyroJerk-std()-Y"           "tBodyGyroJerk-std()-Z"          
+# [31] "tBodyAccMag-mean()"              "tBodyAccMag-std()"               "tGravityAccMag-mean()"          
+# [34] "tGravityAccMag-std()"            "tBodyAccJerkMag-mean()"          "tBodyAccJerkMag-std()"          
+# [37] "tBodyGyroMag-mean()"             "tBodyGyroMag-std()"              "tBodyGyroJerkMag-mean()"        
+# [40] "tBodyGyroJerkMag-std()"          "fBodyAcc-mean()-X"               "fBodyAcc-mean()-Y"              
+# [43] "fBodyAcc-mean()-Z"               "fBodyAcc-std()-X"                "fBodyAcc-std()-Y"               
+# [46] "fBodyAcc-std()-Z"                "fBodyAcc-meanFreq()-X"           "fBodyAcc-meanFreq()-Y"          
+# [49] "fBodyAcc-meanFreq()-Z"           "fBodyAccJerk-mean()-X"           "fBodyAccJerk-mean()-Y"          
+# [52] "fBodyAccJerk-mean()-Z"           "fBodyAccJerk-std()-X"            "fBodyAccJerk-std()-Y"           
+# [55] "fBodyAccJerk-std()-Z"            "fBodyAccJerk-meanFreq()-X"       "fBodyAccJerk-meanFreq()-Y"      
+# [58] "fBodyAccJerk-meanFreq()-Z"       "fBodyGyro-mean()-X"              "fBodyGyro-mean()-Y"             
+# [61] "fBodyGyro-mean()-Z"              "fBodyGyro-std()-X"               "fBodyGyro-std()-Y"              
+# [64] "fBodyGyro-std()-Z"               "fBodyGyro-meanFreq()-X"          "fBodyGyro-meanFreq()-Y"         
+# [67] "fBodyGyro-meanFreq()-Z"          "fBodyAccMag-mean()"              "fBodyAccMag-std()"              
+# [70] "fBodyAccMag-meanFreq()"          "fBodyBodyAccJerkMag-mean()"      "fBodyBodyAccJerkMag-std()"      
+# [73] "fBodyBodyAccJerkMag-meanFreq()"  "fBodyBodyGyroMag-mean()"         "fBodyBodyGyroMag-std()"         
+# [76] "fBodyBodyGyroMag-meanFreq()"     "fBodyBodyGyroJerkMag-mean()"     "fBodyBodyGyroJerkMag-std()"     
+# [79] "fBodyBodyGyroJerkMag-meanFreq()" "label"                           "subject"   
 
 #******************************************************************
 #Requirement 3: Uses descriptive activity names to name the activities in the data set
@@ -122,17 +142,16 @@ activity_label<-features_name<-read.table(activity_label_path)
 names(activity_label)<-c("label","activity_label")
 complete_mean_sd_label <- merge(complete_mean_sd, activity_label,
                               by='label',all.x=TRUE)
-str(complete_mean_sd_label)                  #10299 observation of  51 variables(mean_sd_features+label+activity label)
-# 'data.frame':	10299 obs. of  51 variables:
-# $ label                 : int  1 1 1 1 1 1 1 1 1 1 ...
-# $ tBodyAcc-mean()-X     : num  0.269 0.262 0.238 0.245 0.249 ...
-# $ tBodyAcc-mean()-Y     : num  0.00789 -0.01622 0.0021 -0.03155 -0.02112 ...
+str(complete_mean_sd_label)                  #10299 observation of  82 variables(mean_sd_features+label+activity label)
+# 'data.frame':	10299 obs. of  82 variables:
+#   $ label                          : int  1 1 1 1 1 1 1 1 1 1 ...
+# $ tBodyAcc-mean()-X              : num  0.269 0.262 0.238 0.245 0.249 ...
 # .                         .
 # .                         .
 # .                         .
-# $ fBodyGyro-std()-Z     : num  -0.441 -0.321 -0.483 -0.473 -0.623 ...
-# $ subject               : int  7 21 7 7 18 7 7 7 11 21 ...
-# $ activity_label        : chr  "WALKING" "WALKING" "WALKING" "WALKING" .
+# $ fBodyBodyGyroJerkMag-meanFreq(): num  -0.12175 0.34638 -0.00087 -0.01887 0.10134 ...
+# $ subject                        : int  7 21 7 7 18 7 7 7 11 21 ...
+# $ activity_label                 : chr  "WALKING" "WALKING" "WALKING" "WALKING" ...
 
 
 #******************************************************************
@@ -143,14 +162,14 @@ str(complete_mean_sd_label)                  #10299 observation of  51 variables
 featuremean_activity_label<-aggregate(.~subject+activity_label,complete_mean_sd_label,mean)
 featuremean_activity_label<-featuremean_activity_label[order(featuremean_activity_label$subject,featuremean_activity_label$label),]
 str(featuremean_activity_label)
-# 'data.frame':	180 obs. of  51 variables:
-# $ subject               : int  1 1 1 1 1 1 2 2 2 2 ...
-# $ activity_label        : chr  "WALKING" "WALKING_UPSTAIRS" "WALKING_DOWNSTAIRS" "SITTING" ...
-# $ label                 : num  1 2 3 4 5 6 1 2 3 4 ...
-# $ tBodyAcc-mean()-X     : num  0.277 0.255 0.289 0.261 0.279 ...
+# 'data.frame':	180 obs. of  82 variables:
+# $ subject                        : int  1 1 1 1 1 1 2 2 2 2 ...
+# $ activity_label                 : chr  "WALKING" "WALKING_UPSTAIRS" "WALKING_DOWNSTAIRS" "SITTING" ...
+# $ label                          : num  1 2 3 4 5 6 1 2 3 4 ...
+# $ tBodyAcc-mean()-X              : num  0.277 0.255 0.289 0.261 0.279 ...
 # .                         .
 # .                         .
 # .                         .
-# $ fBodyGyro-std()-Z     : num  -0.437 -0.572 -0.238 -0.944 -0.982 ...
+# $ fBodyBodyGyroJerkMag-meanFreq(): num  0.191 0.114 0.19 0.185 0.334 ...
 
 write.table(featuremean_activity_label, "./course3/Assignment/featurMean.txt", row.name=FALSE)
