@@ -30,9 +30,9 @@ h_con_data<-h_con_data[!is.na(h_con_data$Time),]
 par(mfrow=c(2,2))
 with(h_con_data,plot(DateTime,Global_active_power,type="l",ylab = "Global Active Power (kilowatts)",xlab = ""))
 with(h_con_data,plot(DateTime,Voltage,type="l",ylab = "Voltage"))
-with(h_con_data,{plot(DateTime,Sub_metering_1,type="l",ylab = "Global Active Power (kilowatts)",col="black")
-  lines(DateTime,Sub_metering_2,type="l",ylab = "Global Active Power (kilowatts)",col="red")
-  lines(DateTime,Sub_metering_3,type="l",ylab = "Global Active Power (kilowatts)",col="blue")
+with(h_con_data,{plot(DateTime,Sub_metering_1,ylab = "Energy sub metering",type="l",col="black")
+  lines(DateTime,Sub_metering_2,type="l",col="red")
+  lines(DateTime,Sub_metering_3,type="l",col="blue")
   legend("topright", lty=1, cex=0.8,col=c("black","red","blue"),legend=c("Sub_metering_1","Sub_metering_2","Sub_metering_3"))})
 with(h_con_data,plot(DateTime,Global_reactive_power,type="l",ylab = "Global_reactive_power"))
 
