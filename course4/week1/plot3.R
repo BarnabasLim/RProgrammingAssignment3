@@ -28,10 +28,10 @@ h_con_data<-h_con_data[!is.na(h_con_data$Time),]
 
 
 #plot 3
+png(filename = "./course4/week1/plot3.png")
 par(mfrow=c(1,1))
 with(h_con_data,{plot(DateTime,Sub_metering_1,ylab = "Energy sub metering",type="l",col="black")
   lines(DateTime,Sub_metering_2,type="l",col="red")
   lines(DateTime,Sub_metering_3,type="l",col="blue")
-  legend("topright", lty=1, cex=0.8,col=c("black","red","blue"),legend=c("Sub_metering_1","Sub_metering_2","Sub_metering_3"))})
-dev.copy(png,file="./course4/week1/plot3.png")
+  legend("topright", lty=1,col=c("black","red","blue"),legend=c("Sub_metering_1","Sub_metering_2","Sub_metering_3"))})
 dev.off()
