@@ -18,6 +18,13 @@ rankhospital <- function(state, outcome, num = "best") {
   ## 30-day death rate
   ## 3.convert class of "outcome for 30-day death" to numeric from char
   outcome_overall[, column[outcome]] <- as.numeric(outcome_overall[, column[outcome]])
+  
+  ## 4.Split according to state and extract relavant state as dataframe
+  target_state_filter<-sapply(outcome_overall[, "State"] == state,function(x) !is.na(x)&x)
+  outcome_overall<-outcome_overall[target_state_filter,]
+  
+  
+  
   outcome_overall<-outcome_overall[,c(2,column[outcome])]
   #print(head(outcome_overall))
   outcome_overall<-outcome_overall[!is.na(outcome_overall[2]),]
